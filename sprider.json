@@ -1,0 +1,100 @@
+{
+  "tokens": [
+    {
+      "token_name": "gax",
+      "github": "/neo-project/neo",
+      "twitter": [
+        "https://twitter.com/NEOnewstoday",
+        "https://twitter.com/NEO_council",
+        "https://twitter.com/neomagazin",
+        "https://twitter.com/NeoYokio",
+        "https://twitter.com/neo_blockchain"
+      ]
+    },
+    {
+      "token_name": "dcr",
+      "github": "/decred/dcrd",
+      "twitter": [
+        "https://twitter.com/decredproject",
+        "https://twitter.com/thedecreddigest",
+        "https://twitter.com/decredassembly",
+        "https://twitter.com/jm_buirski",
+        "https://twitter.com/kyleFirethought"
+      ]
+    },
+    {
+      "token_name": "zrx",
+      "github": "/AugurProject/augur-core",
+      "twitter": [
+        "https://twitter.com/AugurProject",
+        "https://twitter.com/Augur",
+        "https://twitter.com/AugurFeed",
+        "https://twitter.com/augur_jp",
+        "https://twitter.com/AugurOrg"
+      ]
+    },
+    {
+      "token_name": "rep",
+      "github": "/AugurProject/augur-core",
+      "twitter": [
+        "https://twitter.com/AugurProject",
+        "https://twitter.com/Augur",
+        "https://twitter.com/AugurFeed",
+        "https://twitter.com/augur_jp",
+        "https://twitter.com/AugurOrg"
+      ]
+    },
+    {
+      "token_name": "zrx",
+      "github": "0xProject/0x.js",
+      "twitter": [
+        "https://twitter.com/0xproject",
+        "https://twitter.com/ZRX_Projct",
+        "https://twitter.com/willwarren89"
+      ]
+    },
+    {
+      "token_name": "ae",
+      "github": "/aeternity/epoch",
+      "twitter": [
+        "https://twitter.com/aetrnty",
+        "https://twitter.com/aeternity_news",
+        "https://twitter.com/AeternityChina",
+        "https://twitter.com/aeternityesp"
+      ]
+    },
+    {
+      "token_name": "bch",
+      "github": "/bitcoincashorg/website",
+      "twitter": [
+        "https://twitter.com/BITCOlNCASH",
+        "https://twitter.com/BTCNewsUpdates",
+        "https://twitter.com/BitcoinCashFund",
+        "https://twitter.com/rBitcoinCash",
+        "https://twitter.com/BitcoinCashFans",
+        "https://twitter.com/BitcoinCashKR",
+        "https://twitter.com/BCHFrance",
+        "https://twitter.com/bchprice"
+      ]
+    },
+    {
+      "token_name": "dash",
+      "github": "/dashpay/dash",
+      "twitter": [
+        "https://twitter.com/dashpay"
+      ]
+    },
+    {
+      "token_name": "doge",
+      "github": "/dogecoin/dogecoin",
+      "twitter": [
+        "https://twitter.com/dogecoin_devs",
+        "https://twitter.com/dogecoin",
+        "https://twitter.com/140Dogecoin",
+        "https://twitter.com/RedditDogecoin",
+        "https://twitter.com/DogeCoinShibe"
+      ]
+    }
+  ]
+
+}
