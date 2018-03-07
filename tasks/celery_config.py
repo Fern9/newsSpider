@@ -40,7 +40,7 @@ CELERY_IMPORTS = (  # 指定导入的任务模块
 CELERYBEAT_SCHEDULE = {
     'github_task': {
         'task': 'tasks.github.sprider.start_sprider',
-        'schedule': timedelta(seconds=1)
+        'schedule': timedelta(seconds=10)
     },
     'twitter_user_task': {
         'task': 'tasks.twitter.sprider.sprider_user_info',
