@@ -14,7 +14,7 @@ from tasks.celery_app import celery_app
 
 @celery_app.task
 def get_google_trend(key, token_id):
-    socks.set_default_proxy(socks.SOCKS5, "127.0.0.1", 1086)
+    # socks.set_default_proxy(socks.SOCKS5, "127.0.0.1", 1086)
     temp_socket = socket.socket
     socket.socket = socks.socksocket
     token, search_time = get_google_token(key)

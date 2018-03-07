@@ -4,11 +4,12 @@
 @file: celery_config
 @time: 2018/2/26 上午12:04
 """
+from common import conf
 from datetime import timedelta
 
-BROKER_URL = 'redis://127.0.0.1:3999'  # 指定 Broker
+BROKER_URL = 'redis://{}:{}'.format(conf['redis']['host'], conf['redis']['port'])  # 指定 Broker
 
-CELERY_RESULT_BACKEND = 'redis://127.0.0.1:3999/0'  # 指定 Backend
+CELERY_RESULT_BACKEND = 'redis://{}:{}/0'.format(conf['redis']['host'], conf['redis']['port'])  # 指定 Backend
 
 CELERY_CREATE_MISSING_QUEUES = True  # 某个程序中出现的队列，在broker中不存在，则立刻创建它
 

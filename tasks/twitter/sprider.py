@@ -17,7 +17,8 @@ token_key = '968122104636891137-Vg05IKZVLEwIsGw9MUoJvwQIIoGTEKe'
 token_secret = 'oReGfk7D9UwXOLbPbWUgqrh84XLu2KNj5XyoZ65S8oElR'
 auth = OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(token_key, token_secret)
-api = API(auth, proxy='socks5://127.0.0.1:1086')
+api = API(auth)
+# api = API(auth, proxy='socks5://127.0.0.1:1086')
 from common import get_tokens
 
 # collection = Mongo().twitter
