@@ -71,6 +71,9 @@ def sync_news(self):
     news_to_send = [new for new in news_to_send if new['title'] is not None and new['content'] is not None]
     post_data = []
     for new in news_to_send:
+        created_at = int(new['created_at'])
+        if created_at < 10 ** 11:
+            created_at *= 1000
         post_data.append({
             'type': new['type'],
             'author': new['author'],
