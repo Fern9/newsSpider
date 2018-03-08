@@ -28,6 +28,7 @@ conf.read('/opt/hashbee/setting.conf')
 def get_tokens():
     try:
         result = requests.post(conf['sync']['host'] + conf['sync']['address_list']).json()
+        print(result)
         if result['error_code'] != 0:
             return False
         return result['result']
