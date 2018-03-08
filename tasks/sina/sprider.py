@@ -7,6 +7,18 @@
 
 from pyquery import PyQuery
 
-d = PyQuery(url='http://tech.sina.com.cn/i/2018-03-04/doc-ifwnpcnt8149255.shtml')
-a = d('.article-content-left')
-print(a.html())
+
+def start_sprider():
+    articles = PyQuery('http://tech.sina.com.cn/zt_d/qukuailiantk/')('.news-tit')
+    for article in articles.items():
+        print(article('a').attr('href'))
+
+
+def get_single_article(url):
+    d = PyQuery(url='http://tech.sina.com.cn/i/2018-03-04/doc-ifwnpcnt8149255.shtml', encoding="utf-8")
+    a = d('#artibody')
+    a.remove('#left_hzh_ad')
+    text = a.text()
+
+
+start_sprider()
