@@ -99,7 +99,7 @@ def sync_news(self):
             })
             collection.save(new)
 
-
+@celery_app.task
 def sync_google_trends():
     collection = Mongo().google_trends
     trends = collection.find({})
@@ -110,9 +110,9 @@ def sync_google_trends():
             'token_id': trend['token_id'],
             'search_number': trend['trends'][-1]['value'][0]
         }
-        send_google_trend(post_data)
+        send_google_trend.delay(post_data)
 
-
+@celery_app.task
 def send_google_trend(data):
     try:
         result = requests.post(conf['sync']['host'] + conf['sync']['search_number_update'], json=data).json()
