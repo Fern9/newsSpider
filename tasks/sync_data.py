@@ -123,6 +123,6 @@ def send_google_trend(data):
         print(e)
 
 
-send_single_token_github(1671043044409346, 'dcr', 'https://github.com/decred/dcrd')
+# send_single_token_github(1671043044409346, 'dcr', 'https://github.com/decred/dcrd')
 # sync_news()
 # sync_google_trends()
