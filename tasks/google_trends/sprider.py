@@ -18,8 +18,8 @@ from tasks.celery_app import celery_app
 @celery_app.task
 def get_google_trend(key, token_id):
     # socks.set_default_proxy(socks.SOCKS5, "127.0.0.1", 1086)
-    temp_socket = socket.socket
-    socket.socket = socks.socksocket
+    # temp_socket = socket.socket
+    # socket.socket = socks.socksocket
     token, search_time = get_google_token(key)
     headers = {
         'host': 'trends.google.com',
@@ -32,7 +32,7 @@ def get_google_trend(key, token_id):
     result = requests.get(request_url, headers=headers).text[5:]
     result = json.loads(result)
     data = result['default']['timelineData']
-    socket.socket = temp_socket
+    # socket.socket = temp_socket
     collection = Mongo().google_trends
     db_result = collection.find_one({
         'token_id': token_id
