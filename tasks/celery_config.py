@@ -42,11 +42,11 @@ CELERY_IMPORTS = (  # 指定导入的任务模块
 CELERYBEAT_SCHEDULE = {
     'github_task': {
        'task': 'tasks.github.sprider.start_sprider',
-       'schedule': timedelta(seconds=100)
+       'schedule': timedelta(seconds=7200)
     },
     'twitter_user_task': {
        'task': 'tasks.twitter.sprider.sprider_user_info',
-       'schedule': timedelta(seconds=110)
+       'schedule': timedelta(seconds=7200)
     },
     'bishijie_task': {
        'task': 'tasks.bishijie.sprider.start_sprider',
@@ -74,11 +74,11 @@ CELERYBEAT_SCHEDULE = {
     },
     'sync_github': {
        'task': 'tasks.sync_data.sync_token_github',
-       'schedule': timedelta(seconds=130)
+       'schedule': timedelta(seconds=7200)
     },
     'sync_twitter': {
        'task': 'tasks.sync_data.sync_token_twitter',
-       'schedule': timedelta(seconds=110)
+       'schedule': timedelta(seconds=7200)
     },
     #'sync_google_trends': {
     #    'task': 'tasks.sync_data.sync_google_trends',
