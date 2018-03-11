@@ -84,9 +84,9 @@ def deal_content():
         if not new['title'] or not new['content']:
             continue
         text = new['title'] + ';' + new['content']
-        key_words = get_keywords(text)
+        keywords = get_keywords(text)
         new.update({
-            'key_words': key_words,
+            'keywords': keywords,
             'has_keywords': 1
         })
         collection.save(new)
