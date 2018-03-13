@@ -33,7 +33,7 @@ def find_repeat_news():
     :return:
     """
     collection = Mongo().news
-    news = list(collection.find({'created_at': {'$gt': time.time() - 15800}}))
+    news = list(collection.find({'created_at': {'$gt': time.time() - 3600}}))
     for new in news:
         new['keywords'] = get_keywords(new['content'])
     for new1 in news:
