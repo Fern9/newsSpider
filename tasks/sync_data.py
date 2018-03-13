@@ -125,6 +125,6 @@ def send_google_trend(data):
 
 if __name__ == '__main__':
     # send_single_token_github(1671043044409346, 'dcr', 'https://github.com/decred/dcrd')
-    # sync_news()
+    sync_news()
     # sync_google_trends()
-    sync_token_github()
+    # sync_token_github()

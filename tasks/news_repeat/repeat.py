@@ -17,8 +17,8 @@ def get_keywords(text):
 
 
 def is_sim(new1, new2):
-    words1 = new1['keywords']
-    words2 = new2['keywords']
+    words1 = new1['keywords_temp']
+    words2 = new2['keywords_temp']
     repeat = [word for word in words1 if word in words2]
     if words2 and words1 and repeat:
         if len(repeat) > 4 or len(repeat) / (len(words1)) > 0.5 or len(repeat) / (len(words2)) > 0.5:
@@ -35,7 +35,7 @@ def find_repeat_news():
     collection = Mongo().news
     news = list(collection.find({'created_at': {'$gt': time.time() - 3600}}))
     for new in news:
-        new['keywords'] = get_keywords(new['content'])
+        new['keywords_temp'] = get_keywords(new['content'])
     for new1 in news:
         if new1.get('repeat'):
             new1['state'] = 1
@@ -52,7 +52,7 @@ def find_repeat_news():
             new1['repeat'] = -1
     for new in news:
         new.pop('state')
-        new.pop('keywords')
+        new.pop('keywords_temp')
         collection.save(new)
 
 
