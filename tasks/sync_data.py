@@ -63,7 +63,8 @@ def sync_news(self):
     collection = Mongo().news
     news_to_send = collection.find({
         'has_send': 0,
-        'has_keywords': 1
+        'has_keywords': 1,
+        'repeat': -1
     })
     if news_to_send.count() == 0:
         return True
@@ -122,7 +123,8 @@ def send_google_trend(data):
     except Exception as e:
         print(e)
 
-
-# send_single_token_github(1671043044409346, 'dcr', 'https://github.com/decred/dcrd')
-# sync_news()
-# sync_google_trends()
+if __name__ == '__main__':
+    # send_single_token_github(1671043044409346, 'dcr', 'https://github.com/decred/dcrd')
+    # sync_news()
+    # sync_google_trends()
+    sync_token_github()

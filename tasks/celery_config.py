@@ -36,7 +36,8 @@ CELERY_IMPORTS = (  # 指定导入的任务模块
     'tasks.sync_data',
     'tasks.keywords.parse',
     'tasks.google_trends.sprider',
-    'tasks.sina.sprider'
+    'tasks.sina.sprider',
+    'tasks.news_repeat.repeat'
 )
 
 CELERYBEAT_SCHEDULE = {
@@ -50,19 +51,19 @@ CELERYBEAT_SCHEDULE = {
     },
     'bishijie_task': {
        'task': 'tasks.bishijie.sprider.start_sprider',
-       'schedule': timedelta(seconds=120)
+       'schedule': timedelta(seconds=220)
     },
     'jinse_task': {
        'task': 'tasks.jinse.sprider.start_sprider',
-       'schedule': timedelta(seconds=100)
+       'schedule': timedelta(seconds=200)
     },
     'wallstreetcn_task': {
        'task': 'tasks.wallstreetcn.sprider.start_sprider',
-       'schedule': timedelta(seconds=100)
+       'schedule': timedelta(seconds=200)
     },
     'sina_task': {
        'task': 'tasks.sina.sprider.start_sprider',
-       'schedule': timedelta(seconds=100)
+       'schedule': timedelta(seconds=200)
     },
     # 'google_trends_task': {
     #     'task': 'tasks.google_trends.sprider.start_sprider',
@@ -80,12 +81,16 @@ CELERYBEAT_SCHEDULE = {
        'task': 'tasks.sync_data.sync_token_twitter',
        'schedule': timedelta(seconds=7200)
     },
-    #'sync_google_trends': {
-    #    'task': 'tasks.sync_data.sync_google_trends',
-    #    'schedule': timedelta(seconds=100)
-    #},
+    'sync_google_trends': {
+       'task': 'tasks.sync_data.sync_google_trends',
+       'schedule': timedelta(seconds=100)
+    },
     'get_keywords': {
        'task': 'tasks.keywords.parse.deal_content',
        'schedule': timedelta(seconds=100)
+    },
+    'find_repeat_news': {
+        'task': 'tasks.news_repeat.repeat.find_repeat_news',
+        'schedule': timedelta(seconds=100)
     }
 }

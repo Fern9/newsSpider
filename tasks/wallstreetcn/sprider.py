@@ -22,7 +22,7 @@ def start_sprider():
     lives = pane('.live-item')
     for li in lives.items():
         source_id = None
-        content = li('.live-item__main__content')('p').html()
+        content = li('.live-item__main__content')('p').text()
         if not content:
             continue
         content_more = li('.live-item__main__content-more')('p').html()
