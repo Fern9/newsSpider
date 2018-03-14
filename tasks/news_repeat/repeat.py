@@ -41,7 +41,7 @@ def find_repeat_news():
             new1['state'] = 1
             continue
         for new2 in news:
-            if new2.get('state') == 1 or new2['_id'] == new1['_id']:
+            if new2['_id'] == new1['_id']:
                 continue
             if is_sim(new1, new2):
                 new1['repeat'] = 1
