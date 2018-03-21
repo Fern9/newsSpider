@@ -76,6 +76,7 @@ def sync_news(self):
         if created_at < 10 ** 11:
             created_at *= 1000
         post_data.append({
+            'new_id': str(new('_id')),
             'type': new['type'],
             'author': new['author'],
             'sprider_from': new['sprider_from'],
