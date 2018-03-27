@@ -9,6 +9,7 @@ import time
 from model.mongo import Mongo
 from tasks.celery_app import celery_app
 from tasks.news.data_util import get_cryptopanic
+from tools.text_util import html2text
 
 
 @celery_app.task
@@ -33,7 +34,7 @@ def cryptopanic_sprider():
             'source': new['source']['domain'],
             'source_id': source_id,
             'title': new.get('title'),
-            'content': new.get('body'),
+            'content': html2text(new.get('body')),
             'url': new.get('url'),
             'images': new.get('image'),
             'has_keywords': 0,
