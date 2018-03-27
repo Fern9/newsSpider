@@ -7,3 +7,4 @@ tweepy == 3.5.0
 PySocks == 1.6.8
 ConfigParser == 3.5.0
 pyquery == 1.4.0
+pycrypto

@@ -13,7 +13,7 @@ import configparser
 
 
 conf = configparser.ConfigParser()
-conf.read('/opt/hashbee/setting.conf')
+conf.read('/opt/hashbee/sprider_setting.conf')
 
 
 # class Configer():

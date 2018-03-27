@@ -37,7 +37,8 @@ CELERY_IMPORTS = (  # 指定导入的任务模块
     'tasks.keywords.parse',
     'tasks.google_trends.sprider',
     'tasks.sina.sprider',
-    'tasks.news_repeat.repeat'
+    'tasks.news_repeat.repeat',
+    'tasks.news.news_sprider'
 )
 
 CELERYBEAT_SCHEDULE = {
@@ -56,6 +57,10 @@ CELERYBEAT_SCHEDULE = {
     'jinse_task': {
        'task': 'tasks.jinse.sprider.start_sprider',
        'schedule': timedelta(seconds=200)
+    },
+    'cryptopanic_task': {
+        'task': 'tasks.news.news_sprider.cryptopanic_sprider',
+        'schedule': timedelta(seconds=300)
     },
     'wallstreetcn_task': {
        'task': 'tasks.wallstreetcn.sprider.start_sprider',
