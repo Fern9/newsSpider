@@ -64,7 +64,9 @@ def sync_news(self):
     news_to_send = collection.find({
         'has_send': 0,
         'has_keywords': 1,
-        'repeat': -1
+        'repeat': -1,
+        'title': {'$ne': ''},
+        'content': {'$ne': ''}
     }).limit(30)
     if news_to_send.count() == 0:
         return True
