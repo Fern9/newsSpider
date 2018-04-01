@@ -91,7 +91,9 @@ def sync_news(self):
     result = None
     try:
         result = requests.post(conf['sync']['host'] + conf['sync']['news_update'],
-                               json={'batch_news': post_data}).json()
+                               json={'batch_news': post_data})
+        print(result)
+        result = result.json()
     except Exception as e:
         self.retry(e)
     if result['error_code'] == 0:
