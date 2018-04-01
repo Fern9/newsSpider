@@ -65,7 +65,7 @@ def sync_news(self):
         'has_send': 0,
         'has_keywords': 1,
         'repeat': -1
-    })
+    }).limit(30)
     if news_to_send.count() == 0:
         return True
     news_to_send = list(news_to_send)
