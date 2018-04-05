@@ -49,4 +49,5 @@ def cryptopanic_sprider():
         collection.insert(insert_data)
 
 if __name__ == '__main__':
-    cryptopanic_sprider()
+    # cryptopanic_sprider()
+    new = get_cryptopanic()

@@ -57,6 +57,9 @@ def get_cryptopanic():
 
         buff = zlib.decompress(buff)
         result = json.loads(buff)
-        return result
+        news = []
+        for new in result['l']:
+            news.append(dict(zip(result['k'], new)))
+        return news
     except:
-        return False
+        return []
