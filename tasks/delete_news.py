@@ -6,7 +6,7 @@
 """
 from pymongo import MongoClient
 
-collection = MongoClient('127.0.0.1', 27018).lucky_token.news
+collection = MongoClient('127.0.0.1', 27018).luckytoken.news
 
 news = collection.find({})
 useful = []
