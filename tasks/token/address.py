@@ -6,12 +6,15 @@
 """
 import time
 
+import pymongo
 import requests
 from pyquery import PyQuery
 import re
 
 from model.mongo import Mongo
+from tasks.celery_app import celery_app
 from tasks.keywords.parse import key_words
+from common import get_tokens
 
 
 def get_erc20():
@@ -87,8 +90,57 @@ def get_eth_holders():
                 })
 
 
+def statistic_tokens_address():
+    collection = Mongo().token
+    tokens = get_tokens()
+    for token in tokens:
+        token_name = token['ticker'].lower()
+        code, address, increase = statistic_token_address(token_name)
+        if not code:
+            address = 0
+            increase = 0
+        db_result = collection.find_one({'token_name': token_name})
+        if db_result:
+            db_result.update({
+                'address': address,
+                'address_increase': increase
+            })
+            collection.save(db_result)
+        else:
+            collection.insert({
+                'token_name': token_name,
+                'address': address,
+                'address_increase': increase
+            })
+
+
+def statistic_token_address(token_name):
+    collection = Mongo().token_address
+    current_info = collection.find({
+        'token_name': token_name
+    }).sort('time', pymongo.DESCENDING).limit(1)
+    if current_info.count() == 0:
+        return False, False, False
+    current_info = current_info[0]
+    last_info = collection.find({
+        'time': {'$gt': current_info['time'] - 86400},
+        'token_name': token_name
+    }).sort('time', pymongo.ASCENDING).limit(1)[0]
+    return True, current_info['address'], current_info['address'] - last_info['address']
+
+
+@celery_app.task
+def get_token_address():
+    get_erc20()
+    get_btc_holders()
+    get_eth_holders()
+    statistic_tokens_address()
+
+
 if __name__ == '__main__':
     # get_erc20()
     # get_erc20_holders('https://etherscan.io/token/0xb64ef51c888972c908cfacf59b47c1afbc0ab8ac#balances')
     # get_btc_holders()
-    get_eth_holders()
+    # get_eth_holders()
+    # statistic_token_address('bnb')
+    statistic_tokens_address()

@@ -38,7 +38,9 @@ CELERY_IMPORTS = (  # 指定导入的任务模块
     'tasks.google_trends.sprider',
     'tasks.sina.sprider',
     'tasks.news_repeat.repeat',
-    'tasks.news.news_sprider'
+    'tasks.news.news_sprider',
+    'tasks.token.address',
+    'tasks.token.transaction'
 )
 
 CELERYBEAT_SCHEDULE = {
@@ -97,5 +99,18 @@ CELERYBEAT_SCHEDULE = {
     'find_repeat_news': {
         'task': 'tasks.news_repeat.repeat.find_repeat_news',
         'schedule': timedelta(seconds=100)
+    },
+    'token_address': {
+        'task': 'tasks.token.address.get_token_address',
+        'schedule': timedelta(seconds=1800)
+    },
+    'token_transaction': {
+        'task': 'tasks.token.transaction.get_transaction',
+        'schedule': timedelta(seconds=300)
+    },
+    'sync_token_info': {
+        'task': 'tasks.sync_data.send_token_inf',
+        'schedule': timedelta(seconds=200)
     }
+
 }

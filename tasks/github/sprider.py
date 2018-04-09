@@ -55,7 +55,7 @@ class GithubSpider():
             if not github_url or not github_url.strip():
                 continue
             repo = github_url.split('/')[-2] + '/' + github_url.split('/')[-1]
-            GithubSpider.get_data(token['ticker'], github_url, github_api_host + repo, token['token_id'])
+            GithubSpider.get_data(token['ticker'].lower(), github_url, github_api_host + repo, token['token_id'])
 
 
 if __name__ == '__main__':

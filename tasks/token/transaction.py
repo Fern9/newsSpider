@@ -8,9 +8,11 @@
 from pyquery import PyQuery
 
 from model.mongo import Mongo
+from tasks.celery_app import celery_app
 from tasks.keywords.parse import key_words
 
 
+@celery_app.task
 def get_transaction():
     dom = PyQuery(url='http://www.bishijie.com/hangqing/coins/top/200')
     lists = dom('#table_body')('tr').items()

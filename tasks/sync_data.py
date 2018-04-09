@@ -128,8 +128,33 @@ def send_google_trend(data):
     except Exception as e:
         print(e)
 
+
+@celery_app.task
+def send_token_info():
+    collection = Mongo().token
+    tokens = get_tokens()
+    for token in tokens:
+        token_name = token['ticker'].lower()
+        db_result = collection.find_one({
+            'token_name': token_name
+        })
+        if not db_result:
+            continue
+        data = {
+            'token_id': token['token_id'],
+            'transaction': db_result.get('transaction', 0),
+            'holders': db_result.get('address', 0),
+            'holders_increase': db_result.get('address_increase', 0)
+        }
+        try:
+            result = requests.post(conf['sync']['host'] + conf['sync']['token_info'], data)
+        except:
+            pass
+
+
 if __name__ == '__main__':
     # send_single_token_github(1671043044409346, 'dcr', 'https://github.com/decred/dcrd')
-    sync_news()
+    # sync_news()
     # sync_google_trends()
     # sync_token_github()
+    send_token_info()
