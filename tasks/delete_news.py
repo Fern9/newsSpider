@@ -6,8 +6,6 @@
 """
 from pymongo import MongoClient
 
-from common import conf
-
 collection = MongoClient('127.0.0.1', 27018).lucky_token.news
 
 news = collection.find({})
