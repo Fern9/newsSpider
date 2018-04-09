@@ -39,8 +39,8 @@ CELERY_IMPORTS = (  # 指定导入的任务模块
     'tasks.sina.sprider',
     'tasks.news_repeat.repeat',
     'tasks.news.news_sprider',
-    'tasks.token.address',
-    'tasks.token.transaction'
+    'tasks.hashbee_token.address',
+    'tasks.hashbee_token.transaction'
 )
 
 CELERYBEAT_SCHEDULE = {
@@ -101,11 +101,11 @@ CELERYBEAT_SCHEDULE = {
         'schedule': timedelta(seconds=100)
     },
     'token_address': {
-        'task': 'tasks.token.address.get_token_address',
+        'task': 'tasks.hashbee_token.address.get_token_address',
         'schedule': timedelta(seconds=1800)
     },
     'token_transaction': {
-        'task': 'tasks.token.transaction.get_transaction',
+        'task': 'tasks.hashbee_token.transaction.get_transaction',
         'schedule': timedelta(seconds=300)
     },
     'sync_token_info': {
