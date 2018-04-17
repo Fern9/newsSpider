@@ -109,7 +109,7 @@ CELERYBEAT_SCHEDULE = {
         'schedule': timedelta(seconds=300)
     },
     'sync_token_info': {
-        'task': 'tasks.sync_data.send_token_inf',
+        'task': 'tasks.sync_data.send_token_info',
         'schedule': timedelta(seconds=200)
     }
 
