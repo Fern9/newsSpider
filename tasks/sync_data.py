@@ -8,7 +8,7 @@ import json
 
 import requests
 
-from common import get_tokens
+from common import get_tokens, get_test_tokens
 from model.mongo import Mongo
 from common import conf
 from tasks.celery_app import celery_app
@@ -39,7 +39,7 @@ def send_single_token_github(token_id, token_name, url):
             'code_hot': db_result['star']
         }
         result = requests.post(conf['sync']['host'] + conf['sync']['git_update'], data=send_data)
-        result = requests.post('http://47.104.20.193:18189' + conf['sync']['git_update'], data=send_data)
+
 
 
 @celery_app.task
@@ -103,7 +103,7 @@ def sync_news(self):
     # TODO test_environment
     try:
         requests.post('http://47.104.20.193:18189' + conf['sync']['news_update'],
-                               json={'batch_news': post_data})
+                      json={'batch_news': post_data})
     except:
         pass
 
@@ -157,6 +157,29 @@ def send_token_info():
         }
         try:
             result = requests.post(conf['sync']['host'] + conf['sync']['token_info'], data)
+        except:
+            pass
+        # TODO test_environment
+        send_test_token_info()
+
+
+def send_test_token_info():
+    collection = Mongo().token
+    tokens = get_test_tokens()
+    for token in tokens:
+        token_name = token['ticker'].lower()
+        db_result = collection.find_one({
+            'token_name': token_name
+        })
+        if not db_result:
+            continue
+        data = {
+            'token_id': token['token_id'],
+            'transaction': db_result.get('transaction', 0),
+            'holders': db_result.get('address', 0),
+            'holders_increase': db_result.get('address_increase', 0)
+        }
+        try:
             result = requests.post('http://47.104.20.193:18189' + conf['sync']['token_info'], data)
         except:
             pass
