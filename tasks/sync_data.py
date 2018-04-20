@@ -20,6 +20,7 @@ def sync_token_github():
     tokens = collection.find({})
     for token in tokens:
         send_single_token_github.delay(token['token_id'], token['token_name'], token['github_url'])
+    sync_test_token_github()
 
 
 @celery_app.task()
@@ -40,6 +41,24 @@ def send_single_token_github(token_id, token_name, url):
         }
         result = requests.post(conf['sync']['host'] + conf['sync']['git_update'], data=send_data)
 
+
+def sync_test_token_github():
+    tokens = get_test_tokens()
+    collection = Mongo().github
+    for token in tokens:
+        db_result = collection.find_one({
+            'token_name': token['ticker'].lower(),
+        })
+        if db_result:
+            send_data = {
+                "token_id": token['token_id'],
+                'url': db_result['github_url'],
+                'star': db_result['star'],
+                'fork': db_result['fork'],
+                'user_count': db_result['watch'],
+                'code_hot': db_result['star']
+            }
+            result = requests.post(conf['sync']['host'] + conf['sync']['git_update'], data=send_data)
 
 
 @celery_app.task
