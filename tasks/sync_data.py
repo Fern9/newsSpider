@@ -39,6 +39,7 @@ def send_single_token_github(token_id, token_name, url):
             'code_hot': db_result['star']
         }
         result = requests.post(conf['sync']['host'] + conf['sync']['git_update'], data=send_data)
+        result = requests.post('http://47.104.20.193:18189' + conf['sync']['git_update'], data=send_data)
 
 
 @celery_app.task
@@ -98,6 +99,14 @@ def sync_news(self):
         result = result.json()
     except Exception as e:
         self.retry(e)
+
+    # TODO test_environment
+    try:
+        result = requests.post('http://47.104.20.193:18189' + conf['sync']['news_update'],
+                               json={'batch_news': post_data})
+    except:
+        pass
+
     if result['error_code'] == 0:
         for new in news_to_send:
             new.update({
@@ -148,6 +157,7 @@ def send_token_info():
         }
         try:
             result = requests.post(conf['sync']['host'] + conf['sync']['token_info'], data)
+            result = requests.post('http://47.104.20.193:18189' + conf['sync']['token_info'], data)
         except:
             pass
 
