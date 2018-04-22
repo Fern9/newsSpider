@@ -10,6 +10,7 @@ from model.mongo import Mongo
 from tasks.celery_app import celery_app
 from tasks.news.data_util import get_cryptopanic
 from tools.text_util import html2text
+from tools.translate import google_translate_list
 
 
 @celery_app.task
@@ -26,6 +27,8 @@ def cryptopanic_sprider():
         }).count()
         if db_count > 0:
             continue
+        title, content =new.get('title'), html2text(new.get('body'))
+        title_cn, content_cn = google_translate_list([title, content])
         insert_data = {
             'type': new['kind'],
             'created_at': int(time.time()),
@@ -39,7 +42,10 @@ def cryptopanic_sprider():
             'images': new.get('image'),
             'has_keywords': 0,
             'has_send': 0,
-            'repeat': -1
+            'repeat': -1,
+            'has_translated': 1,
+            'translated_title': title_cn,
+            'translated_text': content_cn
         }
         currencies = new.get('currencies')
         if currencies:
@@ -49,5 +55,5 @@ def cryptopanic_sprider():
         collection.insert(insert_data)
 
 if __name__ == '__main__':
-    # cryptopanic_sprider()
-    new = get_cryptopanic()
+    cryptopanic_sprider()
+    # new = get_cryptopanic()
