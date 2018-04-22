@@ -126,6 +126,11 @@ def statistic_token_address(token_name):
         'time': {'$gt': current_info['time'] - 86400},
         'token_name': token_name
     }).sort('time', pymongo.ASCENDING).limit(1)[0]
+    if current_info['address'] - last_info['address'] == 0:
+        last_info = collection.find({
+            'time': {'$lte': current_info['time'] - 86400},
+            'token_name': token_name
+        }).sort('time', pymongo.DESCENDING).limit(1)[0]
     return True, current_info['address'], current_info['address'] - last_info['address']
 
 
