@@ -14,23 +14,26 @@ from tasks.keywords.parse import key_words
 
 @celery_app.task
 def get_transaction():
-    dom = PyQuery(url='http://www.bishijie.com/hangqing/coins/top/200')
-    lists = dom('#table_body')('tr').items()
     collection = Mongo().token
+    dom = PyQuery(url='http://www.blocktivity.info/')
+    lists = dom('.font_size_row').items()
     for _ in lists:
-        token_name = _.attr('data-slug').split('-')[-1]
-        if token_name in key_words:
-            db_result = collection.find_one({'token_name': token_name})
-            if db_result:
-                db_result.update({
-                    'transaction': _('.volume').attr('data-usd')
-                })
-                collection.save(db_result)
-            else:
-                collection.insert({
-                    'token_name': token_name,
-                    'transaction': _('.volume').attr('data-usd')
-                })
-
+        token_name = _('td').eq(2)('a').text().lower()
+        print(token_name)
+        transaction = _('td').eq(3).text()
+        transaction = list(filter(str.isdigit, transaction))
+        transaction = int(''.join(map(str, transaction)))
+        print(transaction)
+        db_result = collection.find_one({'token_name': token_name})
+        if db_result:
+            db_result.update({
+                'transaction': transaction
+            })
+            collection.save(db_result)
+        else:
+            collection.insert({
+                'token_name': token_name,
+                'transaction': transaction
+            })
 
 # get_transaction()

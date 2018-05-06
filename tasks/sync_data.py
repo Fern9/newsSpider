@@ -47,7 +47,7 @@ def sync_test_token_github():
     collection = Mongo().github
     for token in tokens:
         db_result = collection.find_one({
-            'token_name': token['ticker'].lower(),
+            'token_name': token['ticker'].upper(),
         })
         if db_result:
             send_data = {
@@ -59,6 +59,7 @@ def sync_test_token_github():
                 'code_hot': db_result['star']
             }
             result = requests.post('http://47.104.20.193:18189' + conf['sync']['git_update'], data=send_data)
+            print(result.json())
 
 
 @celery_app.task
@@ -212,13 +213,14 @@ if __name__ == '__main__':
     # sync_google_trends()
     # sync_token_github()
     # send_token_info()
-    send_data = {
-        "token_id": 1684300467602938,
-        'url': 'test',
-        'star': 1000,
-        'fork': 1000,
-        'user_count': 1000,
-        'code_hot': 1000
-    }
-    result = requests.post('http://47.104.20.193:18189' + conf['sync']['git_update'], data=send_data)
-    print(result.json())
+    # send_data = {
+    #     "token_id": 1684300467602938,
+    #     'url': 'test',
+    #     'star': 1000,
+    #     'fork': 1000,
+    #     'user_count': 1000,
+    #     'code_hot': 1000
+    # }
+    # result = requests.post('http://47.104.20.193:18189' + conf['sync']['git_update'], data=send_data)
+    # print(result.json())
+    sync_test_token_github()
