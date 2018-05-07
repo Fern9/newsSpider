@@ -58,7 +58,7 @@ def sync_test_token_github():
                 'user_count': db_result['watch'],
                 'code_hot': db_result['star']
             }
-            result = requests.post('http://47.104.20.193:18189' + conf['sync']['git_update'], data=send_data)
+            result = requests.post('http://47.52.103.240:8100' + conf['sync']['git_update'], data=send_data)
             print(result.json())
 
 
@@ -125,7 +125,7 @@ def sync_news(self):
 
     # TODO test_environment
     try:
-        requests.post('http://47.104.20.193:18189' + conf['sync']['news_update'],
+        requests.post('http://47.52.103.240:8100' + conf['sync']['news_update'],
                       json={'batch_news': post_data})
     except:
         pass
@@ -203,7 +203,7 @@ def send_test_token_info():
             'holders_increase': db_result.get('address_increase', 0)
         }
         try:
-            result = requests.post('http://47.104.20.193:18189' + conf['sync']['token_info'], data)
+            result = requests.post('http://47.52.103.240:8100' + conf['sync']['token_info'], data)
         except:
             pass
 
