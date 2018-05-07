@@ -111,7 +111,8 @@ def sync_news(self):
             'images': new['images'],
             'keywords': new['keywords'],
             'has_translated': str(new.get('has_translated', 0)),
-            'translated_text': new.get('translated_text', '')
+            'translated_text': new.get('translated_text', ''),
+            'translated_title': new.get('translated_title', '')
         })
     result = None
     try:
