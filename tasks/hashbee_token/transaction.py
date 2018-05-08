@@ -103,4 +103,4 @@ def get_time(time_str):
 # get_erc_transaction()
 # get_time('May-08-2018 10:53:56 AM')
 # print(get_single_erc_transaction('0xB8c77482e45F1F44dE1745F52C74426C631bDD52'))
-get_erc_transaction()
+# get_erc_transaction()
