@@ -47,6 +47,7 @@ def get_erc_transaction():
     p = 1
     # 取前面150位
     while p <= 3:
+        p += 1
         list_page = PyQuery(url='https://etherscan.io/tokens')
         tokens = list_page('tbody')('tr').items()
         for token in tokens:
