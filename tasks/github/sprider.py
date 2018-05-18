@@ -50,7 +50,7 @@ class GithubSpider():
             collection.insert(insert_data)
 
     @staticmethod
-    @celery_app.tasks
+    @celery_app.task
     def start_sprider():
         dom = PyQuery(url='https://cryptomiso.com/')
         items = dom('.card-title').items()
