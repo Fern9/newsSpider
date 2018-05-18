@@ -7,10 +7,13 @@
 import requests
 import time
 
+from pyquery import PyQuery
+
 from model.mongo import Mongo
 from tasks.celery_app import celery_app
 from common import get_tokens
 from tasks.sprider_config import github_api_host
+from tasks.keywords.parse import key_words
 
 
 class GithubSpider():
@@ -19,9 +22,10 @@ class GithubSpider():
 
     @staticmethod
     @celery_app.task
-    def get_data(token_name, url, api_url, token_id):
+    def get_data(token_name, url, api_url):
         collection = Mongo().github
-        result = requests.get('{}?client_id={}&client_secret={}'.format(api_url, 'dcc3734066251548c999', '89d90ad41f32b18d2ed689cb21875b75e88a2d82')).json()
+        result = requests.get('{}?client_id={}&client_secret={}'.format(api_url, 'dcc3734066251548c999',
+                                                                        '89d90ad41f32b18d2ed689cb21875b75e88a2d82')).json()
         if 'forks_count' not in result:
             # TODO record error result
             return
@@ -32,7 +36,6 @@ class GithubSpider():
         insert_data = {
             'token_name': token_name,
             'github_url': url,
-            'token_id': token_id,
             'star': result['stargazers_count'],
             'fork': result['forks_count'],
             'watch': result['subscribers_count'],
@@ -47,17 +50,20 @@ class GithubSpider():
             collection.insert(insert_data)
 
     @staticmethod
-    @celery_app.task
+    @celery_app.tasks
     def start_sprider():
-        tokens = get_tokens()
-        for token in tokens:
-            github_url = token.get('github_url')
-            if not github_url or not github_url.strip():
-                continue
-            github_url = github_url.strip('/')
-            repo = github_url.split('/')[-2] + '/' + github_url.split('/')[-1]
-            GithubSpider.get_data(token['ticker'].lower(), github_url, github_api_host + repo, token['token_id'])
+        dom = PyQuery(url='https://cryptomiso.com/')
+        items = dom('.card-title').items()
+        for _ in items:
+            token_name = _('a').eq(0).text().lower()
+            if token_name in key_words:
+                github_url = _('small')('a').attr('href')
+                _temp = github_url.split('github.com')[1].strip('/').split('/')
+                repo = _temp[0] + '/' + _temp[1]
+                GithubSpider.get_data(token_name, github_url, github_api_host + repo)
 
 
 if __name__ == '__main__':
-    GithubSpider().start_sprider()
+    # GithubSpider().start_sprider()
+    pass
+    # GithubSpider().sprider_from_cryptomiso()

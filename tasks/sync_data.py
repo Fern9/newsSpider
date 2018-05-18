@@ -16,30 +16,29 @@ from tasks.celery_app import celery_app
 
 @celery_app.task
 def sync_token_github():
-    collection = Mongo().github
-    tokens = collection.find({})
+    tokens = get_tokens()
     for token in tokens:
-        send_single_token_github.delay(token['token_id'], token['token_name'], token['github_url'])
+        send_single_token_github(token['token_id'], token['ticker'].lower())
     sync_test_token_github()
 
 
 @celery_app.task()
-def send_single_token_github(token_id, token_name, url):
+def send_single_token_github(token_id, token_name):
     collection = Mongo().github
     db_result = collection.find_one({
         'token_name': token_name,
-        'github_url': url
     })
     if db_result:
         send_data = {
             "token_id": token_id,
-            'url': url,
+            'url': db_result['github_url'],
             'star': db_result['star'],
             'fork': db_result['fork'],
             'user_count': db_result['watch'],
             'code_hot': db_result['star']
         }
         result = requests.post(conf['sync']['host'] + conf['sync']['git_update'], data=send_data)
+        print(result.json())
 
 
 def sync_test_token_github():
@@ -224,4 +223,5 @@ if __name__ == '__main__':
     # }
     # result = requests.post('http://47.104.20.193:18189' + conf['sync']['git_update'], data=send_data)
     # print(result.json())
-    sync_test_token_github()
+    # sync_test_token_github()
+    sync_token_github()

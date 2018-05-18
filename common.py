@@ -26,7 +26,6 @@ conf.read('/opt/hashbee/sprider_setting.conf')
 def get_tokens():
     try:
         result = requests.post(conf['sync']['host'] + conf['sync']['address_list']).json()
-        print(result)
         if result['error_code'] != 0:
             return False
         return result['result']
@@ -37,7 +36,6 @@ def get_tokens():
 def get_test_tokens():
     try:
         result = requests.post('http://47.104.20.193:18189' + conf['sync']['address_list']).json()
-        print(result)
         if result['error_code'] != 0:
             return False
         return result['result']
