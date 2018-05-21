@@ -123,6 +123,11 @@ def sync_news(self):
         self.retry(e)
 
     if result['error_code'] == 0:
+        for new in news_to_send:
+            new.update({
+                'has_send': 1
+            })
+            collection.save(new)
         news_send_finish.delay(news_to_send)
 
     # TODO test_environment
