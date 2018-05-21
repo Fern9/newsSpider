@@ -122,6 +122,9 @@ def sync_news(self):
     except Exception as e:
         self.retry(e)
 
+    if result['error_code'] == 0:
+        news_send_finish.delay(news_to_send)
+
     # TODO test_environment
     try:
         requests.post('http://47.52.103.240:18189' + conf['sync']['news_update'],
@@ -129,12 +132,18 @@ def sync_news(self):
     except:
         pass
 
-    if result['error_code'] == 0:
-        for new in news_to_send:
+
+@celery_app.task(bind=True)
+def news_send_finish(self, news):
+    try:
+        collection = Mongo().news
+        for new in news:
             new.update({
                 'has_send': 1
             })
             collection.save(new)
+    except:
+        self.retry()
 
 
 @celery_app.task
@@ -209,7 +218,7 @@ def send_test_token_info():
 
 if __name__ == '__main__':
     # send_single_token_github(1671043044409346, 'dcr', 'https://github.com/decred/dcrd')
-    # sync_news()
+    sync_news()
     # sync_google_trends()
     # sync_token_github()
     # send_token_info()
@@ -224,4 +233,4 @@ if __name__ == '__main__':
     # result = requests.post('http://47.104.20.193:18189' + conf['sync']['git_update'], data=send_data)
     # print(result.json())
     # sync_test_token_github()
-    sync_token_github()
+    # sync_token_github()
