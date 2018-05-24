@@ -131,7 +131,7 @@ def sync_news(self):
                 'has_send': 1
             })
             collection.save(new)
-        news_send_finish.delay(news_to_send)
+        news_send_finish(news_to_send)
 
     # TODO test_environment
     try:
