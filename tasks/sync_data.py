@@ -6,7 +6,9 @@
 """
 import json
 
+import pymongo
 import requests
+from pymongo import MongoClient
 
 from common import get_tokens, get_test_tokens
 from model.mongo import Mongo
@@ -117,6 +119,7 @@ def sync_news(self):
     try:
         result = requests.post(conf['sync']['host'] + conf['sync']['news_update'],
                                json={'batch_news': post_data})
+        delete_repeat_news()
         print(result)
         result = result.json()
     except Exception as e:
@@ -219,6 +222,21 @@ def send_test_token_info():
             result = requests.post('http://47.52.103.240:18189' + conf['sync']['token_info'], data)
         except:
             pass
+
+
+def delete_repeat_news():
+    collection = MongoClient('127.0.0.1', 27018).luckytoken.news
+    news = collection.find({}).sort('news_time', pymongo.DESCENDING).limit(200)
+    useful = []
+    _remove = []
+    for new in news:
+        if new['title'] in useful:
+            _remove.append(new['title'])
+            collection.remove(new)
+        else:
+            useful.append(new['title'])
+    _remove = set(_remove)
+    print('remove repeat {} news'.format(len(_remove)))
 
 
 if __name__ == '__main__':
