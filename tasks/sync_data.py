@@ -135,8 +135,11 @@ def sync_news(self):
 
     # TODO test_environment
     try:
-        requests.post('http://47.52.103.240:18189' + conf['sync']['news_update'],
+        test_result = requests.post('http://47.52.103.240:18189' + conf['sync']['news_update'],
                       json={'batch_news': post_data})
+        print('send news to test environment')
+        print(post_data)
+        print(test_result.json())
     except:
         pass
 
