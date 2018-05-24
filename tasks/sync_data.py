@@ -48,7 +48,7 @@ def sync_test_token_github():
     collection = Mongo().github
     for token in tokens:
         db_result = collection.find_one({
-            'token_name': token['ticker'].upper(),
+            'token_name': token['ticker'].lower(),
         })
         if db_result:
             send_data = {
@@ -59,6 +59,8 @@ def sync_test_token_github():
                 'user_count': db_result['watch'],
                 'code_hot': db_result['star']
             }
+            print('send test environment github')
+            print(send_data)
             result = requests.post('http://47.52.103.240:18189' + conf['sync']['git_update'], data=send_data)
             print(result.json())
 
