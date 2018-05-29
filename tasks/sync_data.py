@@ -113,6 +113,7 @@ def sync_news(self):
             'created_at': new['created_at'],
             'images': new['images'],
             'keywords': new['keywords'],
+            'keywordstext': ' '.join(new['keywords']) if new['keywords'] else '',
             'has_translated': str(new.get('has_translated', 0)),
             'translated_text': new.get('translated_text', ''),
             'translated_title': new.get('translated_title', '')
@@ -246,7 +247,7 @@ def delete_repeat_news():
 
 if __name__ == '__main__':
     # send_single_token_github(1671043044409346, 'dcr', 'https://github.com/decred/dcrd')
-    sync_news()
+    # sync_news()
     # sync_google_trends()
     # sync_token_github()
     # send_token_info()
@@ -262,3 +263,12 @@ if __name__ == '__main__':
     # print(result.json())
     # sync_test_token_github()
     # sync_token_github()
+    a = ['a', 'b']
+    a = None
+    print(' '.join(a))
+    # post_data = [{'new_id': '5b0be99dcdc8723ec5f66c98', 'type': 'link', 'author': 'trustnodes.com', 'sprider_from': 'cryptopanic', 'source': 'trustnodes.com', 'title': 'Verge Allegedly Copies Hack Fix, Claims Other Project Copied it From Them', 'content': 'Verge, an ancient currency (in crypto time) that no one cared about until suddenly PornHub decided to add them, has experienced two protocol hacks in one month, with the latest...', 'url': 'https://www.trustnodes.com/2018/05/28/verge-allegedly-copies-hack-fix-claims-project-copied', 'created_at': 1527507357, 'images': 'https://www.trustnodes.com/wp-content/uploads/2018/05/verge-dev-new-codebase.jpg', 'keywords': ['XVG'], 'has_translated': '1', 'translated_text': 'Verge，一个古老的货币（在加密时间），没有人关心，直到突然PornHub决定添加它们，经历了两个协议黑客在一个月内，与最新...', 'translated_title': '边缘据称复制哈克修复，索赔其他项目复制它们从他们'}]
+    # test_result = requests.post('http://47.52.103.240:18189' + conf['sync']['news_update'],
+    #                             json={'batch_news': post_data})
+    # print('send news to test environment')
+    # print(post_data)
+    # print(test_result.json())

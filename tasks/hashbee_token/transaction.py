@@ -23,11 +23,9 @@ def get_transaction():
     lists = dom('.font_size_row').items()
     for _ in lists:
         token_name = _('td').eq(2)('a').text().lower()
-        print(token_name)
         transaction = _('td').eq(3).text()
         transaction = list(filter(str.isdigit, transaction))
         transaction = int(''.join(map(str, transaction)))
-        print(transaction)
         db_result = collection.find_one({'token_name': token_name})
         if db_result:
             db_result.update({
@@ -58,9 +56,7 @@ def get_erc_transaction():
             contract_address = href.split('/')[-1]
             if token_name in key_words:
                 try:
-                    print(token_name)
                     transaction = get_single_erc_transaction(contract_address)
-                    print(transaction)
                     db_result = collection.find_one({'token_name': token_name})
                     if db_result:
                         db_result.update({
