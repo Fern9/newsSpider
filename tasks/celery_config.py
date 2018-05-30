@@ -52,18 +52,18 @@ CELERYBEAT_SCHEDULE = {
        'task': 'tasks.twitter.sprider.sprider_user_info',
        'schedule': timedelta(seconds=7200)
     },
-    'bishijie_task': {
-       'task': 'tasks.bishijie.sprider.start_sprider',
-       'schedule': timedelta(seconds=220)
-    },
+    # 'bishijie_task': {
+    #    'task': 'tasks.bishijie.sprider.start_sprider',
+    #    'schedule': timedelta(seconds=220)
+    # },
     'jinse_task': {
        'task': 'tasks.jinse.sprider.start_sprider',
        'schedule': timedelta(seconds=200)
     },
-    'cryptopanic_task': {
-        'task': 'tasks.news.news_sprider.cryptopanic_sprider',
-        'schedule': timedelta(seconds=300)
-    },
+    # 'cryptopanic_task': {
+    #     'task': 'tasks.news.news_sprider.cryptopanic_sprider',
+    #     'schedule': timedelta(seconds=300)
+    # },
     'wallstreetcn_task': {
        'task': 'tasks.wallstreetcn.sprider.start_sprider',
        'schedule': timedelta(seconds=200)
