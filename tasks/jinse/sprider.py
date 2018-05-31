@@ -11,10 +11,10 @@ from pyquery import PyQuery
 from model.mongo import Mongo
 
 
-# from tasks.celery_app import celery_app
+from tasks.celery_app import celery_app
 
 
-# @celery_app.task
+@celery_app.task
 def start_sprider():
     collection = Mongo().news
     data = requests.get('https://api.jinse.com/v4/live/list?limit=20&reading=false')
