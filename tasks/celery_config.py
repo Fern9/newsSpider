@@ -60,10 +60,10 @@ CELERYBEAT_SCHEDULE = {
        'task': 'tasks.jinse.sprider.start_sprider',
        'schedule': timedelta(seconds=200)
     },
-    # 'cryptopanic_task': {
-    #     'task': 'tasks.news.news_sprider.cryptopanic_sprider',
-    #     'schedule': timedelta(seconds=300)
-    # },
+    'cryptopanic_task': {
+        'task': 'tasks.news.news_sprider.cryptopanic_sprider',
+        'schedule': timedelta(seconds=300)
+    },
     'wallstreetcn_task': {
        'task': 'tasks.wallstreetcn.sprider.start_sprider',
        'schedule': timedelta(seconds=200)
