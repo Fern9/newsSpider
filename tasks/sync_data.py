@@ -143,6 +143,7 @@ def sync_news(self):
         print('send news to test environment')
         print(post_data)
         print(test_result.json())
+        print('log_news_id', [_['new_id'] for _ in post_data])
     except:
         pass
 
