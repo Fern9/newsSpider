@@ -139,7 +139,7 @@ def sync_news(self):
     # TODO test_environment
     try:
         test_result = requests.post('http://47.52.103.240:18189' + conf['sync']['news_update'],
-                      json={'batch_news': post_data})
+                                    json={'batch_news': post_data})
         print('send news to test environment')
         print(post_data)
         print(test_result.json())
@@ -232,7 +232,7 @@ def send_test_token_info():
 
 def delete_repeat_news():
     collection = MongoClient('127.0.0.1', 27018).luckytoken.news
-    news = collection.find({}).sort('news_time', pymongo.DESCENDING).limit(200)
+    news = collection.find({})
     useful = []
     _remove = []
     for new in news:
@@ -263,12 +263,22 @@ if __name__ == '__main__':
     # print(result.json())
     # sync_test_token_github()
     # sync_token_github()
-    a = ['a', 'b']
-    a = None
-    print(' '.join(a))
-    # post_data = [{'new_id': '5b0be99dcdc8723ec5f66c98', 'type': 'link', 'author': 'trustnodes.com', 'sprider_from': 'cryptopanic', 'source': 'trustnodes.com', 'title': 'Verge Allegedly Copies Hack Fix, Claims Other Project Copied it From Them', 'content': 'Verge, an ancient currency (in crypto time) that no one cared about until suddenly PornHub decided to add them, has experienced two protocol hacks in one month, with the latest...', 'url': 'https://www.trustnodes.com/2018/05/28/verge-allegedly-copies-hack-fix-claims-project-copied', 'created_at': 1527507357, 'images': 'https://www.trustnodes.com/wp-content/uploads/2018/05/verge-dev-new-codebase.jpg', 'keywords': ['XVG'], 'has_translated': '1', 'translated_text': 'Verge，一个古老的货币（在加密时间），没有人关心，直到突然PornHub决定添加它们，经历了两个协议黑客在一个月内，与最新...', 'translated_title': '边缘据称复制哈克修复，索赔其他项目复制它们从他们'}]
-    # test_result = requests.post('http://47.52.103.240:18189' + conf['sync']['news_update'],
-    #                             json={'batch_news': post_data})
-    # print('send news to test environment')
-    # print(post_data)
-    # print(test_result.json())
+    # a = ['a', 'b']
+    # a = None
+    # print(' '.join(a))
+    post_data = [{'new_id': '5b0cb99ecdc8723ec5f6daa5', 'type': 'news', 'author': '币世界', 'sprider_from': 'bishijie',
+                  'source': 'bishijie', 'title': '5月29日币市《板块风云榜》',
+                  'content': '主力资金流向直接决定板块币种涨跌，《币世界》为您及时追踪主力资金意图，在繁多的板块币种里，挑选热门概念，规避冷门板块。欢迎阅读今日《板块风云榜》（附板块名单，点击”查看详情“）',
+                  'url': 'http://www.bishijie.com/home/newsflashpc/detail?id=36988', 'created_at': 1527560449,
+                  'images': [], 'keywords': [], 'has_translated': '0', 'translated_text': '', 'translated_title': ''},
+                 {'new_id': '5b0cba7bcdc8723ec5f6db06', 'type': 'news', 'author': '币世界', 'sprider_from': 'bishijie',
+                  'source': 'bishijie', 'title': 'ONT官方twitter粉丝已超5万',
+                  'content': '刚刚Ontology（ONT）官方发推称，开通twitter账号六个月以来粉丝已超5万。据《币世界》行情，ONT现均价5.73美元，跌幅11.39%。',
+                  'url': 'http://www.bishijie.com/home/newsflashpc/detail?id=36989', 'created_at': 1527560784,
+                  'images': [], 'keywords': ['eos'], 'keywordstext': 'eos', 'has_translated': '0',
+                  'translated_text': '', 'translated_title': ''}]
+    test_result = requests.post('http://47.52.103.240:18189' + conf['sync']['news_update'],
+                                json={'batch_news': post_data})
+    print('send news to test environment')
+    print(post_data)
+    print(test_result.json())
