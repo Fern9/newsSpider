@@ -72,6 +72,7 @@ def get_keywords(text):
         result.append(item.word)
     return [_ for _ in result if _ in key_words]
 
+
 @celery_app.task
 def deal_content():
     collection = Mongo().news
@@ -91,4 +92,6 @@ def deal_content():
         })
         collection.save(new)
 
-# deal_content()
+
+if __name__ == '__main__':
+    deal_content()

@@ -4,6 +4,7 @@
 @file: send_news_to_test
 @time: 2018/6/16 下午12:41
 """
+import pymongo
 import requests
 
 from common import conf
@@ -15,7 +16,7 @@ news_to_send = collection.find({
     'repeat': -1,
     'title': {'$ne': ''},
     'content': {'$ne': ''}
-}).limit(300)
+}).sort('created_at', pymongo.DESCENDING).limit(300)
 news_to_send = list(news_to_send)
 news_to_send = [new for new in news_to_send if new['title'] is not None and new['content'] is not None]
 post_data = []
