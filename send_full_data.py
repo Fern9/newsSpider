@@ -41,8 +41,8 @@ while start < all_count - 1:
             'url': new['url'],
             'created_at': new['created_at'],
             'images': new['images'],
-            'keywords': new['keywords'],
-            'keywordstext': ' '.join(new['keywords']) if new['keywords'] else '',
+            'keywords': new.get('keywords', []),
+            'keywordstext': ' '.join(new.get('keywords', [])),
             'has_translated': str(new.get('has_translated', 0)),
             'translated_text': new.get('translated_text', ''),
             'translated_title': new.get('translated_title', '')
