@@ -5,11 +5,13 @@
 @time: 2018/3/27 下午7:12
 """
 import requests
+from html.parser import HTMLParser
 
 
 def google_translate_list(texts, target='zh-CN'):
     count = 0
-    while count <=3:
+    html_parser = HTMLParser()
+    while count <= 3:
         url = 'https://translation.googleapis.com/language/translate/v2?key=AIzaSyBCtkbafEHIG1ZPwSaCVda228KWnIfU1-s'
         data = [('target', target)]
         for text in texts:
@@ -17,7 +19,10 @@ def google_translate_list(texts, target='zh-CN'):
         data = tuple(data)
         result = requests.post(url, data=data)
         if result.status_code == 200:
-            return [_['translatedText'] for _ in result.json()['data']['translations']]
+            try:
+                return [html_parser.unescape(_['translatedText']) for _ in result.json()['data']['translations']]
+            except Exception:
+                return [_['translatedText'] for _ in result.json()['data']['translations']]
         else:
             count += 1
     return False
@@ -38,5 +43,5 @@ def google_translate(text, target='zh-CN'):
 
 
 if __name__ == '__main__':
-    print(google_translate_list(['hello world', 'where are you', 'hello world']))
+    print(google_translate_list(["'hello world'", 'where are you', 'hello world']))
     # print(google_translate('hello world'))
