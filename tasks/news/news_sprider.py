@@ -6,6 +6,8 @@
 """
 import time
 
+from pyquery import PyQuery
+
 from model.mongo import Mongo
 from tasks.celery_app import celery_app
 from tasks.news.data_util import get_cryptopanic
@@ -27,7 +29,7 @@ def cryptopanic_sprider():
         }).count()
         if db_count > 0:
             continue
-        title, content =new.get('title'), html2text(new.get('body'))
+        title, content = new.get('title'), html2text(new.get('body'))
         title_cn, content_cn = google_translate_list([title, content])
         insert_data = {
             'type': new['kind'],
@@ -54,6 +56,39 @@ def cryptopanic_sprider():
             insert_data['has_keywords'] = 1
         collection.insert(insert_data)
 
+
+def blockonomi_sprider():
+    dom = PyQuery(url='https://blockonomi.com/category/news/')
+    news = dom('.grid-text').items()
+    for new in news:
+        title = new('.entry-title').text()
+        url = new('.entry-title')('a').attr('href')
+        content = new('p').text()
+        print(title, url, content, '\n')
+
+
+def smithandcrown_sprider():
+    dom = PyQuery(url='https://www.smithandcrown.com/research/')
+    news = dom('article').items()
+    for new in news:
+        title = new('.is-size-5').text()
+        content = new('.f-bodytext1').text()
+        url = new('.is-size-5')('a').attr('href')
+        print(title, url, content, '\n')
+
+def trustnodes_sprider():
+    dom = PyQuery(url='https://www.trustnodes.com/news/news')
+    news = dom('.news-details').items()
+    for new in news:
+        title = new('a').text()
+        url = new('a').attr('href')
+        new_dom = PyQuery(url=url)
+        content = new_dom('.post-content')('p').eq(0).text()
+
+
 if __name__ == '__main__':
-    cryptopanic_sprider()
+    # cryptopanic_sprider()
     # new = get_cryptopanic()
+    # blockonomi_sprider()
+    # smithandcrown_sprider()
+    trustnodes_sprider()
