@@ -2,27 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="72212055-6800-4d91-b133-b1d6a460944c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/celerybeat-schedule.db" afterPath="$PROJECT_DIR$/celerybeat-schedule.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/Fern9.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/Fern9.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common.py" afterPath="$PROJECT_DIR$/common.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/delete_news.py" afterPath="$PROJECT_DIR$/delete_news.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/mongo.py" afterPath="$PROJECT_DIR$/model/mongo.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/send_full_data.py" afterPath="$PROJECT_DIR$/send_full_data.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tasks/bishijie/sprider.py" afterPath="$PROJECT_DIR$/tasks/bishijie/sprider.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tasks/celery_app.py" afterPath="$PROJECT_DIR$/tasks/celery_app.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tasks/celery_config.py" afterPath="$PROJECT_DIR$/tasks/celery_config.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tasks/github/sprider.py" afterPath="$PROJECT_DIR$/tasks/github/sprider.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tasks/google_trends/sprider.py" afterPath="$PROJECT_DIR$/tasks/google_trends/sprider.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tasks/jinse/sprider.py" afterPath="$PROJECT_DIR$/tasks/jinse/sprider.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tasks/news/news_sprider.py" afterPath="$PROJECT_DIR$/tasks/news/news_sprider.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tasks/sina/sprider.py" afterPath="$PROJECT_DIR$/tasks/sina/sprider.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tasks/sprider_config.py" afterPath="$PROJECT_DIR$/tasks/sprider_config.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tasks/sync_data.py" afterPath="$PROJECT_DIR$/tasks/sync_data.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tasks/twitter/sprider.py" afterPath="$PROJECT_DIR$/tasks/twitter/sprider.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tasks/wallstreetcn/sprider.py" afterPath="$PROJECT_DIR$/tasks/wallstreetcn/sprider.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/github.py" afterPath="$PROJECT_DIR$/test/github.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/views.py" afterPath="$PROJECT_DIR$/web/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -58,7 +38,7 @@
         <entry file="file://$PROJECT_DIR$/address.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="271">
-              <caret line="23" column="24" lean-forward="true" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+              <caret line="23" column="24" lean-forward="false" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
               <folding>
                 <element signature="e#87#100#0" expanded="true" />
               </folding>
@@ -716,14 +696,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="41" y="23" width="1239" height="777" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297975" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30984455" sideWeight="0.5021299" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23419689" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329927" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28467155" sideWeight="0.4978701" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23649634" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23649634" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22222222" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.52554744" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1146,7 +1125,7 @@
     <entry file="file://$PROJECT_DIR$/address.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="271">
-          <caret line="23" column="24" lean-forward="true" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+          <caret line="23" column="24" lean-forward="false" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
           <folding>
             <element signature="e#87#100#0" expanded="true" />
           </folding>

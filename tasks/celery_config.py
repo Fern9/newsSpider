@@ -69,7 +69,7 @@ CELERYBEAT_SCHEDULE = {
        'schedule': timedelta(seconds=200)
     },
     'sina_task': {
-       'task': 'tasks.sina.spider.start_spider',
+       'task': 'tasks.sina.spider.start_mpider',
        'schedule': timedelta(seconds=200)
     },
     # 'google_trends_task': {
