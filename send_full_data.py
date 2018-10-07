@@ -34,7 +34,7 @@ while start < all_count - 1:
             'new_id': str(new['_id']),
             'type': new['type'],
             'author': new['author'],
-            'sprider_from': new['sprider_from'],
+            'spider_from': new['spider_from'],
             'source': new['source'],
             'title': new['title'],
             'content': new['content'],

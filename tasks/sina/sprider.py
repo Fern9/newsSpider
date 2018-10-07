@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 @author: Fern9
-@file: sprider
+@file: spider
 @time: 2018/3/7 上午10:36
 """
 import time
@@ -12,7 +12,7 @@ from tasks.celery_app import celery_app
 
 
 @celery_app.task
-def start_sprider():
+def start_spider():
     articles = PyQuery('http://tech.sina.com.cn/zt_d/qukuailiantk/')('.news-tit')
     for article in articles.items():
         url = article('a').attr('href')
@@ -29,7 +29,7 @@ def get_single_article(url):
     source = d('.source').text()
     collection = Mongo().news
     db_result = collection.find_one({
-        'sprider_from': 'sina',
+        'spider_from': 'sina',
         'url': url
     })
     if db_result:
@@ -38,7 +38,7 @@ def get_single_article(url):
         'type': 'articles',
         'created_at': int(time.time()),
         'author': '',
-        'sprider_from': 'sina',
+        'spider_from': 'sina',
         'source': source,
         'source_id': -1,
         'title': title,
@@ -52,4 +52,4 @@ def get_single_article(url):
     return True
 
 
-# start_sprider()
+# start_spider()

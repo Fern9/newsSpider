@@ -105,7 +105,7 @@ def sync_news(self):
             'new_id': str(new['_id']),
             'type': new['type'],
             'author': new['author'],
-            'sprider_from': new['sprider_from'],
+            'spider_from': new['spider_from'],
             'source': new['source'],
             'title': new['title'],
             'content': new['content'],
@@ -267,12 +267,12 @@ if __name__ == '__main__':
     # a = ['a', 'b']
     # a = None
     # print(' '.join(a))
-    post_data = [{'new_id': '5b0cb99ecdc8723ec5f6daa5', 'type': 'news', 'author': '币世界', 'sprider_from': 'bishijie',
+    post_data = [{'new_id': '5b0cb99ecdc8723ec5f6daa5', 'type': 'news', 'author': '币世界', 'spider_from': 'bishijie',
                   'source': 'bishijie', 'title': '5月29日币市《板块风云榜》',
                   'content': '主力资金流向直接决定板块币种涨跌，《币世界》为您及时追踪主力资金意图，在繁多的板块币种里，挑选热门概念，规避冷门板块。欢迎阅读今日《板块风云榜》（附板块名单，点击”查看详情“）',
                   'url': 'http://www.bishijie.com/home/newsflashpc/detail?id=36988', 'created_at': 1527560449,
                   'images': [], 'keywords': [], 'has_translated': '0', 'translated_text': '', 'translated_title': ''},
-                 {'new_id': '5b0cba7bcdc8723ec5f6db06', 'type': 'news', 'author': '币世界', 'sprider_from': 'bishijie',
+                 {'new_id': '5b0cba7bcdc8723ec5f6db06', 'type': 'news', 'author': '币世界', 'spider_from': 'bishijie',
                   'source': 'bishijie', 'title': 'ONT官方twitter粉丝已超5万',
                   'content': '刚刚Ontology（ONT）官方发推称，开通twitter账号六个月以来粉丝已超5万。据《币世界》行情，ONT现均价5.73美元，跌幅11.39%。',
                   'url': 'http://www.bishijie.com/home/newsflashpc/detail?id=36989', 'created_at': 1527560784,

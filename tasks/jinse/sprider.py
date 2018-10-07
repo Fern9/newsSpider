@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 @author: Fern9
-@file: sprider
+@file: spider
 @time: 2018/2/28 下午6:01
 """
 import time
@@ -15,7 +15,7 @@ from tasks.celery_app import celery_app
 
 
 @celery_app.task
-def start_sprider():
+def start_spider():
     collection = Mongo().news
     data = requests.get('https://api.jinse.com/v4/live/list?limit=20&reading=false')
     for date in data.json()['list']:
@@ -25,7 +25,7 @@ def start_sprider():
 
             # 查询记录是否已经存在
             db_count = collection.find({
-                'sprider_from': 'jinse',
+                'spider_from': 'jinse',
                 'source_id': source_id
             }).count()
             if db_count > 0:
@@ -41,7 +41,7 @@ def start_sprider():
                 'type': 'news',
                 'created_at': int(time.time()),
                 'author': "金色快讯",
-                'sprider_from': 'jinse',
+                'spider_from': 'jinse',
                 'source': 'jinse',
                 'source_id': source_id,
                 'title': title,
@@ -56,4 +56,4 @@ def start_sprider():
 
 
 if __name__ == '__main__':
-    start_sprider()
+    start_spider()

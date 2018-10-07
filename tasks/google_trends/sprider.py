@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 @author: Fern9
-@file: sprider
+@file: spider
 @time: 2018/3/2 下午10:40
 """
 import socket
@@ -67,11 +67,11 @@ def get_google_token(key):
     return token, search_time
 
 @celery_app.task
-def start_sprider():
+def start_spider():
     tokens = get_tokens()
     for token in tokens:
         get_google_trend(token['name'], token['token_id'])
         time.sleep(5)
 
 if __name__ == '__main__':
-    start_sprider()
+    start_spider()

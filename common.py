@@ -11,7 +11,7 @@ import requests
 import configparser
 
 conf = configparser.ConfigParser()
-conf.read('/opt/hashbee/sprider_setting.conf')
+conf.read('/opt/hashbee/spider_setting.conf')
 
 
 # class Configer():
@@ -44,4 +44,5 @@ def get_test_tokens():
 
 
 if __name__ == '__main__':
-    print(get_tokens())
+    # print(get_tokens())
+    print(get_test_tokens())

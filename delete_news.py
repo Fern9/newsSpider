@@ -6,9 +6,7 @@
 """
 from __future__ import absolute_import
 import sys
-print(sys.path)
 from pymongo import MongoClient
-from common import get_tokens
 
 collection = MongoClient('127.0.0.1', 27018).luckytoken.news
 

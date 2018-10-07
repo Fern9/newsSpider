@@ -28,52 +28,52 @@ CELERY_RESULT_SERIALIZER = 'json'  # 读取任务结果一般性能要求不高�
 CELERY_IGNORE_RESULT = True  # 忽略任务结果
 
 CELERY_IMPORTS = (  # 指定导入的任务模块
-    'tasks.github.sprider',
-    'tasks.twitter.sprider',
-    'tasks.bishijie.sprider',
-    'tasks.jinse.sprider',
-    'tasks.wallstreetcn.sprider',
+    'tasks.github.spider',
+    'tasks.twitter.spider',
+    'tasks.bishijie.spider',
+    'tasks.jinse.spider',
+    'tasks.wallstreetcn.spider',
     'tasks.sync_data',
     'tasks.keywords.parse',
-    'tasks.google_trends.sprider',
-    'tasks.sina.sprider',
+    'tasks.google_trends.spider',
+    'tasks.sina.spider',
     'tasks.news_repeat.repeat',
-    'tasks.news.news_sprider',
+    'tasks.news.news_spider',
     'tasks.hashbee_token.address',
     'tasks.hashbee_token.transaction'
 )
 
 CELERYBEAT_SCHEDULE = {
     'github_task': {
-       'task': 'tasks.github.sprider.start_sprider',
+       'task': 'tasks.github.spider.start_spider',
        'schedule': timedelta(seconds=7200)
     },
     'twitter_user_task': {
-       'task': 'tasks.twitter.sprider.sprider_user_info',
+       'task': 'tasks.twitter.spider.spider_user_info',
        'schedule': timedelta(seconds=7200)
     },
     # 'bishijie_task': {
-    #    'task': 'tasks.bishijie.sprider.start_sprider',
+    #    'task': 'tasks.bishijie.spider.start_spider',
     #    'schedule': timedelta(seconds=220)
     # },
     'jinse_task': {
-       'task': 'tasks.jinse.sprider.start_sprider',
+       'task': 'tasks.jinse.spider.start_spider',
        'schedule': timedelta(seconds=200)
     },
     'cryptopanic_task': {
-        'task': 'tasks.news.news_sprider.cryptopanic_sprider',
+        'task': 'tasks.news.news_spider.cryptopanic_spider',
         'schedule': timedelta(seconds=300)
     },
     'wallstreetcn_task': {
-       'task': 'tasks.wallstreetcn.sprider.start_sprider',
+       'task': 'tasks.wallstreetcn.spider.start_spider',
        'schedule': timedelta(seconds=200)
     },
     'sina_task': {
-       'task': 'tasks.sina.sprider.start_sprider',
+       'task': 'tasks.sina.spider.start_spider',
        'schedule': timedelta(seconds=200)
     },
     # 'google_trends_task': {
-    #     'task': 'tasks.google_trends.sprider.start_sprider',
+    #     'task': 'tasks.google_trends.spider.start_spider',
     #     'schedule': timedelta(seconds=20)
     # },
     'sync_news': {

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 @author: Fern9
-@file: sprider
+@file: spider
 @time: 2018/2/27 下午4:20
 """
 import requests
@@ -11,7 +11,7 @@ from common import conf
 
 
 @celery_app.task(bind=True)
-def start_sprider(self):
+def start_spider(self):
     result = None
     try:
         result = requests.get(conf['news']['bishijie']).json()
@@ -22,7 +22,7 @@ def start_sprider(self):
         for date in result:
             id_list = [new['newsflash_id'] for new in result[date]['buttom']]
             db_news = collection.find({
-                    'sprider_from': 'bishijie',
+                    'spider_from': 'bishijie',
                     'source_id': {'$in': id_list}
                 })
             db_id_list = [new['source_id'] for new in db_news]
@@ -41,7 +41,7 @@ def start_sprider(self):
                     'type': 'news',
                     'created_at': new['issue_time'],
                     'author': new['source'],
-                    'sprider_from': 'bishijie',
+                    'spider_from': 'bishijie',
                     'source': 'bishijie',
                     'source_id': new['newsflash_id'],
                     'title': title,
@@ -55,4 +55,4 @@ def start_sprider(self):
     except Exception as e:
         self.retry(e)
 
-start_sprider()
+start_spider()

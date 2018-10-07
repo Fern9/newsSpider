@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 @author: Fern9
-@file: sprider
+@file: spider
 @time: 2018/2/26 下午10:15
 """
 import json
@@ -43,7 +43,7 @@ def get_user_info(token_name, username, token_id):
 
 
 @celery_app.task
-def sprider_user_info():
+def spider_user_info():
     tokens = get_tokens()
     for token in tokens:
         twitter = token.get('twitter_url')
@@ -57,4 +57,4 @@ def sprider_user_info():
 
 if __name__ == '__main__':
     # get_user_info('doge', 'DogeCoinShibe')
-    sprider_user_info()
+    spider_user_info()

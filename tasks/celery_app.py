@@ -6,6 +6,6 @@
 """
 from celery import Celery
 
-# celery_app = Celery('hashbee_task', broker='redis://127.0.0.1:3999', include=['tasks.github.sprider'])
+# celery_app = Celery('hashbee_task', broker='redis://127.0.0.1:3999', include=['tasks.github.spider'])
 celery_app = Celery('hashbee_task')
 celery_app.config_from_object('tasks.celery_config')

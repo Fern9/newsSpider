@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 @author: Fern9
-@file: sprider
+@file: spider
 @time: 2018/2/26 上午12:15
 """
 import requests
@@ -12,7 +12,7 @@ from pyquery import PyQuery
 from model.mongo import Mongo
 from tasks.celery_app import celery_app
 from common import get_tokens
-from tasks.sprider_config import github_api_host
+from tasks.spider_config import github_api_host
 from tasks.keywords.parse import key_words
 
 
@@ -39,7 +39,7 @@ class GithubSpider():
             'star': result['stargazers_count'],
             'fork': result['forks_count'],
             'watch': result['subscribers_count'],
-            'sprider_time': time.time(),
+            'spider_time': time.time(),
             'update_time': result['updated_at'],
             'create_time': result['created_at']
         }
@@ -51,7 +51,7 @@ class GithubSpider():
 
     @staticmethod
     @celery_app.task
-    def start_sprider():
+    def start_spider():
         dom = PyQuery(url='https://cryptomiso.com/')
         items = dom('.card-title').items()
         for _ in items:
@@ -64,6 +64,6 @@ class GithubSpider():
 
 
 if __name__ == '__main__':
-    # GithubSpider().start_sprider()
+    # GithubSpider().start_spider()
     pass
-    # GithubSpider().sprider_from_cryptomiso()
+    # GithubSpider().spider_from_cryptomiso()

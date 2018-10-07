@@ -10,14 +10,14 @@ from model.mongo import Mongo
 import pymongo
 from tools import return_error, return_success
 
-data_view = Blueprint('sprider', __name__)
+data_view = Blueprint('spider', __name__)
 
 
 @data_view.route('/github/<token_name>', methods=['GET'])
 def get_github_data(token_name):
     collection = Mongo().github
     try:
-        result = collection.find({'token_name': token_name}).sort('sprider_time', pymongo.DESCENDING).limit(1)[0]
+        result = collection.find({'token_name': token_name}).sort('spider_time', pymongo.DESCENDING).limit(1)[0]
         result.pop('_id')
         return return_success(data=result)
     except Exception as e:

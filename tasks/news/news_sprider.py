@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 @author: Fern9
-@file: news_sprider
+@file: news_spider
 @time: 2018/3/26 下午5:22
 """
 import time
@@ -16,7 +16,7 @@ from tools.translate import google_translate_list
 
 
 @celery_app.task
-def cryptopanic_sprider():
+def cryptopanic_spider():
     collection = Mongo().news
     news = get_cryptopanic()
     if not news:
@@ -24,7 +24,7 @@ def cryptopanic_sprider():
     for new in news:
         source_id = new['pk']
         db_count = collection.find({
-            'sprider_from': 'cryptopanic',
+            'spider_from': 'cryptopanic',
             'source_id': source_id
         }).count()
         if db_count > 0:
@@ -35,7 +35,7 @@ def cryptopanic_sprider():
             'type': new['kind'],
             'created_at': int(time.time()),
             'author': new.get('domain'),
-            'sprider_from': 'cryptopanic',
+            'spider_from': 'cryptopanic',
             'source': new['source']['domain'],
             'source_id': source_id,
             'title': new.get('title'),
@@ -57,7 +57,7 @@ def cryptopanic_sprider():
         collection.insert(insert_data)
 
 
-def blockonomi_sprider():
+def blockonomi_spider():
     dom = PyQuery(url='https://blockonomi.com/category/news/')
     news = dom('.grid-text').items()
     for new in news:
@@ -67,7 +67,7 @@ def blockonomi_sprider():
         print(title, url, content, '\n')
 
 
-def smithandcrown_sprider():
+def smithandcrown_spider():
     dom = PyQuery(url='https://www.smithandcrown.com/research/')
     news = dom('article').items()
     for new in news:
@@ -76,7 +76,7 @@ def smithandcrown_sprider():
         url = new('.is-size-5')('a').attr('href')
         print(title, url, content, '\n')
 
-def trustnodes_sprider():
+def trustnodes_spider():
     dom = PyQuery(url='https://www.trustnodes.com/news/news')
     news = dom('.news-details').items()
     for new in news:
@@ -87,8 +87,8 @@ def trustnodes_sprider():
 
 
 if __name__ == '__main__':
-    # cryptopanic_sprider()
+    # cryptopanic_spider()
     # new = get_cryptopanic()
-    # blockonomi_sprider()
-    # smithandcrown_sprider()
-    trustnodes_sprider()
+    # blockonomi_spider()
+    # smithandcrown_spider()
+    trustnodes_spider()

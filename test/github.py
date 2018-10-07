@@ -4,6 +4,6 @@
 @file: test_github
 @time: 2018/2/26 上午2:57
 """
-from tasks.github.sprider import GithubSpider
+from tasks.github.spider import GithubSpider
 
-GithubSpider().start_sprider()
+GithubSpider().start_spider()

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 @author: Fern9
-@file: sprider
+@file: spider
 @time: 2018/2/28 下午10:16
 """
 import time
@@ -11,7 +11,7 @@ from tasks.celery_app import celery_app
 
 
 @celery_app.task
-def start_sprider():
+def start_spider():
     collection = Mongo().news
     # html = requests.get('http://www.jinse.com/lives').text
     dom = PyQuery(url='https://wallstreetcn.com/live/blockchain')
@@ -42,7 +42,7 @@ def start_sprider():
             images.append(image.attr('src'))
         # 查询记录是否已经存在
         db_count = collection.find({
-            'sprider_from': 'wallstreetcn',
+            'spider_from': 'wallstreetcn',
             'content': content
         }).count()
         if db_count > 0:
@@ -52,7 +52,7 @@ def start_sprider():
             'type': 'news',
             'created_at': int(time.time()),
             'author': "华尔街见闻",
-            'sprider_from': 'wallstreetcn',
+            'spider_from': 'wallstreetcn',
             'source': 'wallstreetcn',
             'source_id': -1,
             'title': title,
@@ -65,4 +65,4 @@ def start_sprider():
         collection.insert(insert_data)
     return True
 
-# start_sprider()
+# start_spider()

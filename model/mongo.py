@@ -13,7 +13,7 @@ class Mongo():
 
     def __new__(cls, *args, **kwargs):
         # if cls.db is None:
-        cls.db = MongoClient(conf['mongo']['host'], int(conf['mongo']['port'])).sprider
+        cls.db = MongoClient(conf['mongo']['host'], int(conf['mongo']['port'])).spider
         return cls.db
 
 
